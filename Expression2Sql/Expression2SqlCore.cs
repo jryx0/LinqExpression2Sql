@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace Expression2Sql
 {
@@ -34,12 +35,42 @@ namespace Expression2Sql
 			this._sqlPack.DatabaseType = dbType;
 		}
 
-		public void Clear()
+       
+
+        public void Clear()
 		{
 			this._sqlPack.Clear();
 		}
 
-		private string SelectParser(params Type[] ary)
+
+        private string InsertParser(params Type[] ary)
+        {
+            this._sqlPack.Clear();
+            this._sqlPack.IsSingleTable = true;           
+
+            return "Insert Into  " + typeof(T).Name +"({0}) \nValues(";
+        }
+        public Expression2SqlCore<T> Insert()
+        {
+            this._sqlPack.Sql.Append(InsertParser(typeof(T)));           
+
+            return this;
+        }
+        public Expression2SqlCore<T> Values(Expression<Func<T, object>> expression = null)
+        {            
+            Expression2SqlProvider.Values(expression.Body, this._sqlPack);
+
+            var sql  = String.Format(this._sqlPack.Sql.ToString(), this._sqlPack.SelectFieldsStr);
+            this._sqlPack.Sql.Clear();
+            this._sqlPack.Sql.Append(sql);
+
+            return this;
+
+          //  throw new Exception();
+        }
+
+
+        private string SelectParser(params Type[] ary)
 		{
 			this._sqlPack.Clear();
 			this._sqlPack.IsSingleTable = false;
@@ -213,7 +244,7 @@ namespace Expression2Sql
 			return this;
 		}
 
-		private Expression2SqlCore<T> JoinParser<T2>(Expression<Func<T, T2, bool>> expression, string leftOrRightJoin = "")
+        private Expression2SqlCore<T> JoinParser<T2>(Expression<Func<T, T2, bool>> expression, string leftOrRightJoin = "")
 		{
 			string joinTableName = typeof(T2).Name;
 			this._sqlPack.SetTableAlias(joinTableName);

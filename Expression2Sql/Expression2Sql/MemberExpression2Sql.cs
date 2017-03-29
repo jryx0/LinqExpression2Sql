@@ -140,5 +140,17 @@ namespace Expression2Sql
 			sqlPack.Sql.AppendFormat("select sum({0}) from {1}", expression.Member.Name, expression.Member.DeclaringType.Name);
 			return sqlPack;
 		}
-	}
+
+        protected override SqlPack Values(MemberExpression expression, SqlPack sqlPack)
+        {
+            sqlPack.SelectFields.Add(expression.Member.Name);
+
+            //sqlPack.AddDbParameter(expression.Member.Name, expression.Member.Name);
+            sqlPack.AddDbParameter(expression.Member.Name);
+
+
+            return sqlPack;
+        }
+
+    }
 }

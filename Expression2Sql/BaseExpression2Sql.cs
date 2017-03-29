@@ -72,8 +72,17 @@ namespace Expression2Sql
 			throw new NotImplementedException("未实现" + typeof(T).Name + "2Sql.Sum方法");
 		}
 
+        protected virtual SqlPack Values(T expression, SqlPack sqlPack)
+        {
+            throw new NotImplementedException("未实现" + typeof(T).Name + "2Sql.Values方法");
+        }
 
-		public SqlPack Update(Expression expression, SqlPack sqlPack)
+        public SqlPack Values(Expression expression, SqlPack sqlPack)
+        {
+            return Values((T)expression, sqlPack);
+        }
+
+        public SqlPack Update(Expression expression, SqlPack sqlPack)
 		{
 			return Update((T)expression, sqlPack);
 		}
@@ -121,5 +130,7 @@ namespace Expression2Sql
 		{
 			return Sum((T)expression, sqlPack);
 		}
-	}
+
+        
+    }
 }

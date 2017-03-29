@@ -40,10 +40,18 @@ namespace Expression2Sql
 			return new Expression2SqlCore<T>(DatabaseType).Update(expression);
 		}
 
-		public static Expression2SqlCore<T> Select<T>(Expression<Func<T, object>> expression = null)
+        public static Expression2SqlCore<T> Insert<T>()
+        {
+            return new Expression2SqlCore<T>(DatabaseType).Insert();
+        }
+
+        public static Expression2SqlCore<T> Select<T>(Expression<Func<T, object>> expression = null)
 		{
 			return new Expression2SqlCore<T>(DatabaseType).Select(expression);
 		}
+
+
+
 		public static Expression2SqlCore<T> Select<T, T2>(Expression<Func<T, T2, object>> expression = null)
 		{
 			return new Expression2SqlCore<T>(DatabaseType).Select(expression);

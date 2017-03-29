@@ -25,7 +25,11 @@ namespace Expression2SqlTest
 				"查询单表所有字段"
 			);
 
-			Printf(
+
+
+
+
+            Printf(
 				Expre2Sql.Select<UserInfo>(u => u.Id),
 				"查询单表单个字段"
 			);
@@ -35,22 +39,31 @@ namespace Expression2SqlTest
 				"查询单表多个字段"
 			);
 
+           
 
-			Printf(
+            Printf(
 				Expre2Sql.Select<UserInfo>(u => u.Id).
 						  Where(u => u.Name.Like("b")),
 				"查询单表，带where Like条件"
 			);
 
+            
 
-			Printf(
+
+            Printf(
 				Expre2Sql.Select<UserInfo>(u => u.Id).
 						  Where(u => u.Name.LikeLeft("b")),
 				"查询单表，带where LikeLeft条件"
 			);
 
+            Printf(
+                Expre2Sql.Insert<UserInfo>().
+                          Values(u => new { u.Id, u.Name }),
+                "插入所有字段"
+            );
 
-			Printf(
+
+            Printf(
 				Expre2Sql.Select<UserInfo>(u => u.Id).
 						  Where(u => u.Name.LikeRight("b")),
 				"查询单表，带where LikeRight条件"

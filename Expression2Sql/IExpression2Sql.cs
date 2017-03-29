@@ -22,7 +22,10 @@ namespace Expression2Sql
 {
 	public interface IExpression2Sql
 	{
-		SqlPack Update(Expression expression, SqlPack sqlPack);
+
+      
+
+        SqlPack Update(Expression expression, SqlPack sqlPack);
 
 		SqlPack Select(Expression expression, SqlPack sqlPack);
 
@@ -45,5 +48,7 @@ namespace Expression2Sql
 		SqlPack Count(Expression expression, SqlPack sqlPack);
 
 		SqlPack Sum(Expression expression, SqlPack sqlPack);
-	}
+
+        SqlPack Values(Expression expression, SqlPack sqlPack);
+    }
 }

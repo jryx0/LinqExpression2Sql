@@ -22,7 +22,13 @@ namespace Expression2Sql
 {
 	class UnaryExpression2Sql : BaseExpression2Sql<UnaryExpression>
 	{
-		protected override SqlPack Select(UnaryExpression expression, SqlPack sqlPack)
+        protected override SqlPack Values(UnaryExpression expression, SqlPack sqlPack)
+        {
+            Expression2SqlProvider.Values(expression.Operand, sqlPack);
+            return sqlPack;
+        }
+
+        protected override SqlPack Select(UnaryExpression expression, SqlPack sqlPack)
 		{
 			Expression2SqlProvider.Select(expression.Operand, sqlPack);
 			return sqlPack;

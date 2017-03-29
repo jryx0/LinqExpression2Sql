@@ -133,7 +133,13 @@ namespace Expression2Sql
 			throw new NotImplementedException("未实现的Expression2Sql");
 		}
 
-		public static void Update(Expression expression, SqlPack sqlPack)
+        public static void Values(Expression expression, SqlPack sqlPack)
+        {
+            GetExpression2Sql(expression).Values(expression, sqlPack);
+        }
+
+
+        public static void Update(Expression expression, SqlPack sqlPack)
 		{
 			GetExpression2Sql(expression).Update(expression, sqlPack);
 		}

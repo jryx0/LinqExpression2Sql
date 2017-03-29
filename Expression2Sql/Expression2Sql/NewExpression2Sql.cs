@@ -49,7 +49,25 @@ namespace Expression2Sql
 			return sqlPack;
 		}
 
-		protected override SqlPack GroupBy(NewExpression expression, SqlPack sqlPack)
+        protected override SqlPack Values(NewExpression expression, SqlPack sqlPack)
+        {
+             
+            foreach (Expression item in expression.Arguments)
+            {
+                Expression2SqlProvider.Values(item, sqlPack);
+                sqlPack.Sql.Append( ",");
+            }
+
+            if (sqlPack[sqlPack.Length - 1] == ',')
+            {
+                sqlPack.Sql.Remove(sqlPack.Length - 1, 1);
+                sqlPack.Sql.Append(")");
+            }
+
+            return sqlPack;
+        }
+
+        protected override SqlPack GroupBy(NewExpression expression, SqlPack sqlPack)
 		{
 			foreach (Expression item in expression.Arguments)
 			{

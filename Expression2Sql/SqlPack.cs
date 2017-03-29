@@ -116,7 +116,21 @@ namespace Expression2Sql
 			}
 		}
 
-		public bool SetTableAlias(string tableName)
+        public void AddDbParameter(string name, object parameterValue)
+        {
+            if (parameterValue == null || parameterValue == DBNull.Value)
+            {
+                this.Sql.Append(" null");
+            }
+            else
+            {
+                string param = this.DbParamPrefix + name;
+                this.DbParams.Add(name, param);
+                this.Sql.Append(" " + param);
+            }
+        }
+
+        public bool SetTableAlias(string tableName)
 		{
 			if (!this._dicTableName.Keys.Contains(tableName))
 			{
