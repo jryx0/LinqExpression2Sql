@@ -1,4 +1,4 @@
-#LinqExpression2Sql
+# LinqExpression2Sql
 增加Insert方法   =>   Expre2Sql.Insert<UserInfo>().Values(u => new { u.Id, u.Name });
 修改子类别名混乱bug。
 
