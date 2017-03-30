@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Expression2SqlTest
 {
-    class UserInfo : BaseEntiy
+    class UserInfo : BaseEntity
     {
         
         public int Sex { get; set; }
