@@ -42,8 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\BaseEntiy.cs" />
     <Compile Include="Models\City.cs" />
-    <Compile Include="Models\Class.cs" />
+    <Compile Include="Models\UserCity.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

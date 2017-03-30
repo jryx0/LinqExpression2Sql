@@ -146,12 +146,12 @@ namespace Expression2SqlTest
 
 
 			Printf(
-				 Expre2Sql.Select<UserInfo, Account, Student, Class, City, Country>((u, a, s, d, e, f) =>
+				 Expre2Sql.Select<UserInfo, Account, Student, UserCity, City, Country>((u, a, s, d, e, f) =>
 						   new { u.Id, a.Name, StudentName = s.Name, ClassName = d.Name, e.CityName, CountryName = f.Name }).
 						   Join<Account>((u, a) => u.Id == a.UserId).
 						   LeftJoin<Account, Student>((a, s) => a.Id == s.AccountId).
-						   RightJoin<Student, Class>((s, c) => s.Id == c.UserId).
-						   InnerJoin<Class, City>((c, d) => c.CityId == d.Id).
+						   RightJoin<Student, UserCity>((s, c) => s.Id == c.UserId).
+						   InnerJoin<UserCity, City>((c, d) => c.CityId == d.Id).
 						   FullJoin<City, Country>((c, d) => c.CountryId == d.Id).
 						   Where(u => u.Id != null),
 				 "多表复杂关联查询"
